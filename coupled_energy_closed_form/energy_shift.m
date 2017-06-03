@@ -11,10 +11,10 @@
 %
 clear;
 
-% Ground referenced lower semiconductor band energy.
+% Ground referenced lower semiconductor band energy, normalized.
 E1 = 0.5;
 
-% Ground referenced upper semiconductor band energy.
+% Ground referenced upper semiconductor band energy, normalized.
 E2 = 1.0;
 
 % E_phi is the energy of the perturbed excited molecular state, Equation 7.13.

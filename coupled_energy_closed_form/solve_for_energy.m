@@ -22,10 +22,10 @@ abs(E2 - E_search_range)) - (E_search_range - E_phi);
 
 % Find the zero crossing.
 if direction == 0,
-  first_neg = max(find(result >= 0));
+  first_negative_crossing = max(find(result >= 0));
 else
-  first_neg = min(find(result <= 0));
+  first_negative_crossing = min(find(result <= 0));
 end;
 
 % Return the energy that satisfies Equation 10.11.
-Energy = E_search_range(first_neg);
+Energy = E_search_range(first_negative_crossing);

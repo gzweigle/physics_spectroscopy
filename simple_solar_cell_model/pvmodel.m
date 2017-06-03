@@ -57,14 +57,14 @@ for Rsh = [1e10 100 25] / 100 / 100, % This is Om-m^2
     for voltage = V_range,
 
       % Start with Rs = 0 and Rsh = "infinity".
-      Jiter(r_index,v_index) = current_calculation(...
+      J_iter(r_index,v_index) = current_calculation(...
       Jsc, Ja, 2*Fa/h^3/c^2, step, Ea, Ta, voltage, 0, 0, 1e10);
 
       % Iterate to get the converged current value.
       for jind = 1:10,
-        Jiter(r_index,v_index) = current_calculation(...
+        J_iter(r_index,v_index) = current_calculation(...
         Jsc, Ja, 2*Fa/h^3/c^2, step, Ea,
-        Ta, voltage, Jiter(r_index,v_index), Rs, Rsh);
+        Ta, voltage, J_iter(r_index,v_index), Rs, Rsh);
       end;
 
       v_index = v_index + 1;
@@ -72,18 +72,18 @@ for Rsh = [1e10 100 25] / 100 / 100, % This is Om-m^2
     end;
 
     % To make the plot nice, remove any currents above the open circuit voltage.
-    index = find(Jiter(r_index,:) < 0);
-    Jiter(r_index,index) = zeros(1,length(index));
+    index = find(J_iter(r_index,:) < 0);
+    J_iter(r_index,index) = zeros(1,length(index));
 
-    % Find the peak power. Jiter is in units of A / m^2.
-    peak_e(r_index) = max(100*V_range.*Jiter(r_index,:)/Pt);
+    % Find the peak power. J_iter is in units of A / m^2.
+    peak_e(r_index) = max(100*V_range.*J_iter(r_index,:)/Pt);
 
     % The efficiency is the ratio of actual over maximum possible power.
-    efficiency(r_index,:) = 100*V_range.*Jiter(r_index,:)/Pt;
+    efficiency(r_index,:) = 100*V_range.*J_iter(r_index,:)/Pt;
 
     % Compute the fill factor.
-    fill(r_index) = peak_e(r_index) * Pt / (Jiter(r_index,1) * ...
-    V_range(min(find(Jiter(r_index,:)==0)))) / 100;
+    fill(r_index) = peak_e(r_index) * Pt / (J_iter(r_index,1) * ...
+    V_range(min(find(J_iter(r_index,:)==0)))) / 100;
 
     r_index = r_index + 1;
 
@@ -93,7 +93,7 @@ end;
 
 % Divide by 10 to convert A/m^2 to mA/cm^2.
 figure(1);
-plot(V_range,Jiter'/10);
+plot(V_range,J_iter'/10);
 grid;
 xlabel('V: volts');
 ylabel('J: mA/cm^2');

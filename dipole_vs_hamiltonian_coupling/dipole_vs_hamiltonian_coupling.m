@@ -4,10 +4,10 @@
 % Master of Science in Chemistry
 % Washington State University
 %
-% This code generates Figure 6.2, 6.3, and 6.5 in my thesis.
+% This code generates Figure 6.2, 6.4, and 6.5 in my thesis.
 % See page 89 - 93 for details.
 %
-% See Figure 6.3 for details of the geometry between two
+% See Figure 6.3 for details of the geometry between two dipoles.
 % In the Matlab code, capital A and B represent alpha and beta, respectively.
 %
 % Greg C. Zweigle
